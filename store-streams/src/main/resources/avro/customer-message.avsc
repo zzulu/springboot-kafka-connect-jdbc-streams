@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "Customer",
-  "namespace": "com.mycompany.commons.storeapp.avro",
+  "namespace": "com.coupang.tb2.commons.storeapp.avro",
   "fields": [
     {
       "name": "id",
@@ -33,5 +33,5 @@
       "type": "string"
     }
   ],
-  "connect.name": "com.mycompany.commons.storeapp.avro.Customer"
+  "connect.name": "Customer"
 }

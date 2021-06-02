@@ -1,0 +1,16 @@
+ext {
+	orgMapstructVersion = "1.4.2.Final"
+	springdocOpenapiVersion = "1.5.8"
+	lombokMapstructBindingVersion = "0.2.0"
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	runtimeOnly 'mysql:mysql-connector-java'
+
+	implementation "org.mapstruct:mapstruct:${orgMapstructVersion}"
+	annotationProcessor "org.mapstruct:mapstruct-processor:${orgMapstructVersion}"
+	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+	implementation "org.springdoc:springdoc-openapi-ui:${springdocOpenapiVersion}"
+}

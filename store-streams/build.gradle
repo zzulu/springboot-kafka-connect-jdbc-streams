@@ -1,0 +1,27 @@
+ext {
+	springCloudVersion = "2020.0.3"
+	avroVersion = "1.10.2"
+	confluentVersion = "6.1.1"
+	springdocOpenapiVersion = "1.5.8"
+}
+
+repositories {
+	maven { url "https://packages.confluent.io/maven/" }
+}
+
+dependencies {
+	implementation 'org.apache.kafka:kafka-streams'
+	implementation 'org.springframework.cloud:spring-cloud-stream'
+	implementation 'org.springframework.cloud:spring-cloud-stream-binder-kafka-streams'
+
+	implementation "org.apache.avro:avro:${avroVersion}"
+	implementation "io.confluent:kafka-streams-avro-serde:${confluentVersion}"
+	implementation "io.confluent:kafka-avro-serializer:${confluentVersion}"
+	implementation "org.springdoc:springdoc-openapi-ui:${springdocOpenapiVersion}"
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}

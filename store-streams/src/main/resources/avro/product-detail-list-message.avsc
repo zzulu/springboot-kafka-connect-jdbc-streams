@@ -1,16 +1,16 @@
 {
   "type": "record",
   "name": "ProductDetailList",
-  "namespace": "com.mycompany.commons.storeapp.avro",
+  "namespace": "com.coupang.tb2.commons.storeapp.avro",
   "fields": [
     {
       "name": "products",
       "type": {
         "type": "array",
-        "items": "com.mycompany.commons.storeapp.avro.ProductDetail"
+        "items": "ProductDetail"
       },
       "default": []
     }
   ],
-  "connect.name": "com.mycompany.commons.storeapp.avro.ProductDetailList"
+  "connect.name": "ProductDetailList"
 }

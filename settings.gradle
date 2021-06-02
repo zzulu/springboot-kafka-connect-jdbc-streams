@@ -1,0 +1,3 @@
+rootProject.name = 'springboot-kafka-connect-jdbc-streams'
+include 'store-api'
+include 'store-streams'

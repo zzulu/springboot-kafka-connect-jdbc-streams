@@ -1,4 +1,4 @@
-# springboot-kafka-connect-jdbc-streams
+# Springboot Kafka Connect JDBC Streams (w/ Gradle)
 
 The main goal of this project is to play with [`Kafka`](https://kafka.apache.org), [`Kafka Connect`](https://docs.confluent.io/current/connect/index.html) and [`Kafka Streams`](https://docs.confluent.io/current/streams/index.html). For this, we have: `store-api` that inserts/updates records in [`MySQL`](https://www.mysql.com); `Source Connectors` that monitor inserted/updated records in `MySQL` and push messages related to those changes to `Kafka`; `Sink Connectors` that listen messages from `Kafka` and insert/update documents in [`Elasticsearch`](https://www.elastic.co); finally, `store-streams` that listens messages from `Kafka`, treats them using `Kafka Streams` and push new messages back to `Kafka`.
 
@@ -32,16 +32,16 @@ In order to run this project, you can use [`JSON`](https://www.json.org) or [`Av
 
 - Open a terminal and inside `springboot-kafka-connect-jdbc-streams` root folder run
   ```
-  docker-compose up -d
+  docker compose up -d
   ```
   > **Note:** During the first run, an image for `kafka-connect` will be built, whose name is `springboot-kafka-connect-jdbc-streams_kafka-connect`. Run the command below to rebuild it.
   > ```
-  > docker-compose build
+  > docker compose build
   > ```
 
 - Wait until all containers are `Up (healthy)`. To check the status of the containers run
   ```
-  docker-compose ps
+  docker compose ps
   ```
   
 ## Create Kafka Topics
@@ -110,7 +110,7 @@ Steps to create the connectors:
   
   - Run the command below to start the application
     ```
-    ./mvnw clean spring-boot:run --projects store-api -Dspring-boot.run.jvmArguments="-Dserver.port=9080"
+    ./gradlew :store-api:bootRun --args='--server.port=9080'
     ```
     > **Note**
     >
@@ -126,16 +126,16 @@ Steps to create the connectors:
 
     - **For JSON (de)serialization**
       ```
-      ./mvnw clean spring-boot:run --projects store-streams -Dspring-boot.run.jvmArguments="-Dserver.port=9081"
+      ./gradlew :store-streams:bootRun --args='--server.port=9081'
       ```
     - **For Avro (de)serialization**
       ```
-      ./mvnw clean spring-boot:run --projects store-streams -Dspring-boot.run.jvmArguments="-Dserver.port=9081" -Dspring-boot.run.profiles=avro
+      ./gradlew :store-streams:bootRun --args='--server.port=9081 --spring.profiles.active=avro'
       ```
-      > The command below generates Java classes from Avro files present in `src/main/resources/avro`
+      <!-- > The command below generates Java classes from Avro files present in `src/main/resources/avro`
       > ```
       > ./mvnw generate-sources --projects store-streams
-      > ```
+      > ``` -->
 
 ## Running Applications as Docker containers
 
@@ -360,7 +360,7 @@ Steps to create the connectors:
 
 - To stop and remove docker-compose containers, networks and volumes, make sure you are inside `springboot-kafka-connect-jdbc-streams` root folder and run
   ```
-  docker-compose down -v
+  docker compose down -v
   ```
 
 ## Issues
