@@ -32,16 +32,16 @@ In order to run this project, you can use [`JSON`](https://www.json.org) or [`Av
 
 - Open a terminal and inside `springboot-kafka-connect-jdbc-streams` root folder run
   ```
-  docker compose up -d
+  docker-compose up -d
   ```
   > **Note:** During the first run, an image for `kafka-connect` will be built, whose name is `springboot-kafka-connect-jdbc-streams_kafka-connect`. Run the command below to rebuild it.
   > ```
-  > docker compose build
+  > docker-compose build
   > ```
 
 - Wait until all containers are `Up (healthy)`. To check the status of the containers run
   ```
-  docker compose ps
+  docker-compose ps
   ```
   
 ## Create Kafka Topics
@@ -102,7 +102,7 @@ Steps to create the connectors:
   ```
   docker logs kafka-connect
   ```
-## Running Applications with Maven
+## Running Applications with Gradle
 
 - **store-api**
 
@@ -110,7 +110,7 @@ Steps to create the connectors:
   
   - Run the command below to start the application
     ```
-    ./gradlew :store-api:bootRun --args='--server.port=9080'
+    ./gradlew :store-api:clean :store-api:bootRun --args='--server.port=9080'
     ```
     > **Note**
     >
@@ -126,11 +126,11 @@ Steps to create the connectors:
 
     - **For JSON (de)serialization**
       ```
-      ./gradlew :store-streams:bootRun --args='--server.port=9081'
+      ./gradlew :store-streams:clean :store-streams:bootRun --args='--server.port=9081'
       ```
     - **For Avro (de)serialization**
       ```
-      ./gradlew :store-streams:bootRun --args='--server.port=9081 --spring.profiles.active=avro'
+      ./gradlew :store-streams:clean :store-streams:bootRun --args='--server.port=9081 --spring.profiles.active=avro'
       ```
       <!-- > The command below generates Java classes from Avro files present in `src/main/resources/avro`
       > ```
@@ -352,7 +352,7 @@ Steps to create the connectors:
 ## Shutdown
 
 - Stop applications
-  - If they were started with `Maven`, go to the terminals where they are running and press `Ctrl+C`
+  - If they were started with `Gradle`, go to the terminals where they are running and press `Ctrl+C`
   - If they were started as Docker container, run the script below
     ```
     ./stop-apps.sh
@@ -360,7 +360,7 @@ Steps to create the connectors:
 
 - To stop and remove docker-compose containers, networks and volumes, make sure you are inside `springboot-kafka-connect-jdbc-streams` root folder and run
   ```
-  docker compose down -v
+  docker-compose down -v
   ```
 
 ## Issues
